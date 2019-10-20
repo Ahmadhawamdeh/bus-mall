@@ -11,9 +11,11 @@ Product.roundLimit = 25;
 Product.all = [];
 
 Product.container = document.getElementById('productcont');
+
 Product.leftImage = document.getElementById('left-img');
 Product.middImage = document.getElementById('midd-img');
 Product.rightImage = document.getElementById('right-image');
+
 Product.leftTitle = document.getElementById('left-title');
 Product.middTitle = document.getElementById('midd-title');
 Product.rightTitle = document.getElementById('right-title');
@@ -117,7 +119,7 @@ function clickHandler(event) {
     ProductClicked = Product.leftObject;
   } else if (clickedId === 'midd-img') {
     ProductClicked = Product.middObject;
-  } else if (clickedId === 'right-img') {
+  } else if (clickedId === 'right-image') {
     ProductClicked = Product.rightObject;
   } else {
     alert('Please just click on one of the pictures products listed on the screen, not outside the picture frame ^_^')
