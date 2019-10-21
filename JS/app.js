@@ -12,6 +12,8 @@ Product.all = [];
 
 Product.container = document.getElementById('productcont');
 
+///////////////////// step 1
+
 Product.leftImage = document.getElementById('left-img');
 Product.middImage = document.getElementById('midd-img');
 Product.rightImage = document.getElementById('right-image');
@@ -20,9 +22,13 @@ Product.leftTitle = document.getElementById('left-title');
 Product.middTitle = document.getElementById('midd-title');
 Product.rightTitle = document.getElementById('right-title');
 
+///////////////////// step 2
+
 Product.leftObject = null;
 Product.middObject= null;
 Product.rightObject = null;
+
+///////////////////// step 3
 
 new Product('Bag', 'images/bag.jpg');
 new Product('Banana', 'images/banana.jpg');
@@ -44,9 +50,14 @@ new Product('unicorn', 'images/unicorn.jpg');
 new Product('usb', 'images/usb.gif');
 new Product('water-can', 'images/water-can.jpg');
 new Product('wine-glass', 'images/wine-glass.jpg');
+
+///////////////////// step 4
+
 function renderNewProduct() {
 
   var forbidden = [Product.leftObject, Product.middObject, Product.rightObject];
+
+///////////////////// step 5
 
   do {
     Product.leftObject = getRandomProduct();
@@ -62,13 +73,19 @@ function renderNewProduct() {
     Product.rightObject = getRandomProduct();
   } while (forbidden.includes(Product.rightObject));
 
+///////////////////// step 6
+
   Product.leftObject.shownCtr++;
   Product.middObject.shownCtr++;
   Product.rightObject.shownCtr++;
 
+///////////////////// step 7
+
   var leftProductImageElement = Product.leftImage;
   var middProductImageElement = Product.middImage;
   var rightProductImageElement = Product.rightImage;
+
+///////////////////// step 8
 
   leftProductImageElement.setAttribute('src', Product.leftObject.src);
   leftProductImageElement.setAttribute('alt', Product.leftObject.title);
@@ -79,9 +96,13 @@ function renderNewProduct() {
   rightProductImageElement.setAttribute('src', Product.rightObject.src);
   rightProductImageElement.setAttribute('alt', Product.rightObject.title);
 
+///////////////////// step 9
+
   Product.leftTitle.textContent = Product.leftObject.title;
   Product.middTitle.textContent = Product.middObject.title;
   Product.rightTitle.textContent = Product.rightObject.title;
+
+///////////////////// step 10
 }
 function getRandomProduct() {
   var index = Math.floor(Math.random() * Product.all.length);
@@ -136,6 +157,9 @@ function clickHandler(event) {
     }
   }
 }
+
+///////////////////// step 11
+
 Product.container.addEventListener('click', clickHandler);
 updateTotals();
 renderNewProduct();
