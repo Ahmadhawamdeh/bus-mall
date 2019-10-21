@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+  margin-left: 0px;
+  font-style: italic;
+  
+}
+header{
+  color: brown;
+  font-size: x-large;
+}
+body{
+  background-image: url('https://cdn3.vectorstock.com/i/1000x1000/30/12/abstract-geometric-background-black-and-white-vector-10383012.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: antiquewhite;
+  font-style: italic;
+  font-size: large;
+  text-align: center;
+
+}
+section div {
+  width: 20%;
+  float: left;
+  padding: 20px;
+  display: block;
+  margin: auto;
+  padding-top: 65px;
+}
+section div img {
+  margin-left: 0px;
+  max-width: 100%;
+  height: 200px;
+  border: 3px solid rgba(44, 53, 33, 0.18);
+  border-radius: 5%;
+  margin-top: 187px;
+}
+table {
+  margin-left: 10px;
+  border-collapse: collapse;
+  font-size: 22px;
+  border-radius: 5% ;
+  background-image: url('https://i.pinimg.com/originals/24/5d/95/245d95b6e3e101c42a3c2fc4d59412c4.jpg');
+  color: aliceblue;
+  
+}
+table, th, td {
+  padding: 3px 10px;
+  border: 3px solid wheat;
+}
