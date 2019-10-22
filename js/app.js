@@ -116,7 +116,7 @@ function Totalsproducts() {
         addElement('td', row, item.title);
         addElement('td', row, '' + item.clickCtr);
         addElement('td', row, '' + item.shownCtr);
-        addElement('td', row, '' + ' had ' + item.clickCtr + ' votes ' + ' and was shown ' + item.shownCtr);
+        addElement('td', row, '' + ' had ' + item.clickCtr + ' clickes ' + ' and was shown ' + item.shownCtr);
     }
 }
 /////////////// step 11
@@ -181,6 +181,7 @@ function rendermallitems() {
                 backgroundColor: 'white',
                 borderColor: 'black',
                 data: ClickedArray,
+
             },
             {
                 label: 'Item Shown',
