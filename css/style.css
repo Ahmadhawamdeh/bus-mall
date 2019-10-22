@@ -16,9 +16,10 @@ body{
 section div {
   width: 20%;
   float: left;
+  padding: 20px;
   display: block;
   margin: auto;
-  
+  padding-top: 65px;
 }
 section div img {
   margin-left: 0px;
@@ -28,14 +29,7 @@ section div img {
   border-radius: 5%;
   margin-top: 187px;
 }
-table {
-  border-collapse: collapse;
-  font-size: x-large;
-  background-image: url('https://ak5.picdn.net/shutterstock/videos/15661825/thumb/1.jpg');
-  color: aliceblue;
-height: 100px;  
-}
-table, th, td {
-  padding: 3px 10px;
-  border: 3px solid wheat;
+ul{
+  color: red;
+  font-size: large;
 }

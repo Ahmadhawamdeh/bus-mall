@@ -6,34 +6,34 @@ function Product(title, src) {
     this.shownCtr = 0;
     Product.all.push(this);
 }
-/////////////// step 1
-
 Product.roundCtr = 0;
 Product.roundLimit = 25;
 Product.all = [];
 
-/////////////// step 2
-
 Product.container = document.getElementById('productcont');
+
+///////////////////// step 1
+
 Product.leftImage = document.getElementById('left-img');
 Product.middImage = document.getElementById('midd-img');
-Product.rightImage = document.getElementById('right-img');
+Product.rightImage = document.getElementById('right-image');
+
 Product.leftTitle = document.getElementById('left-title');
 Product.middTitle = document.getElementById('midd-title');
 Product.rightTitle = document.getElementById('right-title');
 
-/////////////// step 3
+///////////////////// step 2
 
 Product.leftObject = null;
 Product.middObject = null;
 Product.rightObject = null;
 
-/////////////// step 4
+///////////////////// step 3
 
-new Product('bag', 'images/bag.jpg');
-new Product('banana', 'images/banana.jpg');
-new Product('bathroom', 'images/bathroom.jpg');
-new Product('boots', 'images/boots.jpg');
+new Product('Bag', 'images/bag.jpg');
+new Product('Banana', 'images/banana.jpg');
+new Product('Bathroom', 'images/bathroom.jpg');
+new Product('Boots', 'images/boots.jpg');
 new Product('breakfast', 'images/breakfast.jpg');
 new Product('bubblegum', 'images/bubblegum.jpg');
 new Product('chair', 'images/chair.jpg');
@@ -51,54 +51,60 @@ new Product('usb', 'images/usb.gif');
 new Product('water-can', 'images/water-can.jpg');
 new Product('wine-glass', 'images/wine-glass.jpg');
 
-/////////////// step 5
+///////////////////// step 4
 
-function renderBus() {
+function renderNewProduct() {
+
     var forbidden = [Product.leftObject, Product.middObject, Product.rightObject];
+
+    ///////////////////// step 5
+
     do {
-        Product.leftObject = getRandomitems();
+        Product.leftObject = getRandomProduct();
     } while (forbidden.includes(Product.leftObject))
     forbidden.push(Product.leftObject);
+
     do {
-        Product.middObject = getRandomitems();
+        Product.middObject = getRandomProduct();
     } while (forbidden.includes(Product.middObject))
     forbidden.push(Product.middObject);
+
     do {
-        Product.rightObject = getRandomitems();
+        Product.rightObject = getRandomProduct();
     } while (forbidden.includes(Product.rightObject));
 
-    /////////////// step 6
+    ///////////////////// step 6
 
     Product.leftObject.shownCtr++;
     Product.middObject.shownCtr++;
     Product.rightObject.shownCtr++;
 
-    /////////////// step 7
+    ///////////////////// step 7
 
-    var leftImageElement = Product.leftImage;
-    var middimageElement = Product.middImage;
-    var rightImageElement = Product.rightImage;
+    var leftProductImageElement = Product.leftImage;
+    var middProductImageElement = Product.middImage;
+    var rightProductImageElement = Product.rightImage;
 
-    /////////////// step 8
+    ///////////////////// step 8
 
-    leftImageElement.setAttribute('src', Product.leftObject.src);
-    leftImageElement.setAttribute('alt', Product.leftObject.title);
+    leftProductImageElement.setAttribute('src', Product.leftObject.src);
+    leftProductImageElement.setAttribute('alt', Product.leftObject.title);
 
-    middimageElement.setAttribute('src', Product.middObject.src);
-    middimageElement.setAttribute('alt', Product.middObject.title);
+    middProductImageElement.setAttribute('src', Product.middObject.src);
+    middProductImageElement.setAttribute('alt', Product.middObject.title);
 
-    rightImageElement.setAttribute('src', Product.rightObject.src);
-    rightImageElement.setAttribute('alt', Product.rightObject.title);
+    rightProductImageElement.setAttribute('src', Product.rightObject.src);
+    rightProductImageElement.setAttribute('alt', Product.rightObject.title);
 
-    /////////////// step 9
+    ///////////////////// step 9
 
     Product.leftTitle.textContent = Product.leftObject.title;
     Product.middTitle.textContent = Product.middObject.title;
     Product.rightTitle.textContent = Product.rightObject.title;
 
-    /////////////// step 10
+    ///////////////////// step 10
 }
-function getRandomitems() {
+function getRandomProduct() {
     var index = Math.floor(Math.random() * Product.all.length);
     return Product.all[index];
 }
@@ -107,54 +113,49 @@ function randomInRange(min, max) {
     var rand = Math.floor(Math.random() * range) + min
     return rand;
 }
-function Totalsproducts() {
-    var tableBody = document.getElementById('newpro');
-    tableBody.innerHTML = '';
-    for (var i = 0; i < Product.all.length; i++) {
-        var item = Product.all[i];
-        var row = addElement('tr', tableBody);
-        addElement('td', row, item.title);
-        addElement('td', row, '' + item.clickCtr);
-        addElement('td', row, '' + item.shownCtr);
-        addElement('td', row, '' + ' had ' + item.clickCtr + ' clickes ' + ' and was shown ' + item.shownCtr);
-    }
-}
-/////////////// step 11
+///////////////////// step 11
+function finalList() {
+    var list = document.getElementById("list");
 
-function addElement(tag, container, text) {
-    var element = document.createElement(tag);
-    container.appendChild(element);
-    if (text) {
-        element.textContent = text;
+    var li = document.createElement('li')
+    list.appendChild(li)
+
+    for (var i = 0; i < Product.all.length; i++) {
+        var roduct = Product.all[i]
+        li = document.createElement('li');
+        list.appendChild(li);
+        li.textContent = roduct.title + " had " + roduct.clickCtr + " votes and was shown " + roduct.shownCtr + " times.";
     }
-    return element;
 }
-function clickItem(event) {
+///////////////////// step 12
+
+function clickHandler(event) {
     var clickedId = event.target.id;
-    var itemClicked;
+    var ProductClicked;
     if (clickedId === 'left-img') {
-        itemClicked = Product.leftObject;
+        ProductClicked = Product.leftObject;
     } else if (clickedId === 'midd-img') {
-        itemClicked = Product.middObject;
-    } else if (clickedId === 'right-img') {
-        itemClicked = Product.rightObject;
+        ProductClicked = Product.middObject;
+    } else if (clickedId === 'right-image') {
+        ProductClicked = Product.rightObject;
     } else {
-        console.log('Um, what was clicked on???', clickedId);
+        alert('Please just click on one of the pictures Product listed on the screen, not outside the picture frame ^_^')
     }
-    if (itemClicked) {
-        itemClicked.clickCtr++;
+    if (ProductClicked) {
+        ProductClicked.clickCtr++;
         Product.roundCtr++;
-        Totalsproducts();
         if (Product.roundCtr === Product.roundLimit) {
+            alert('No more clicking');
             rendermallitems();
-            alert('No more clicking !');
-            Product.container.removeEventListener('click', clickItem);
+            Product.container.removeEventListener('click', clickHandler);
+            finalList();
+
         } else {
-            renderBus();
+            renderNewProduct();
         }
     }
 }
-/////////////// step 12
+///////////////////// step 13
 
 function rendermallitems() {
     var MallArray = [];
@@ -194,8 +195,11 @@ function rendermallitems() {
         }
     });
 }
-/////////////// step 14
+///////////////////// step 14
+Product.container.addEventListener('click', clickHandler);
+renderNewProduct();
+rendermallitems();
 
-Product.container.addEventListener('click', clickItem);
-Totalsproducts();
-renderBus();
+
+
+
