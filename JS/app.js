@@ -25,7 +25,7 @@ Product.rightTitle = document.getElementById('right-title');
 ///////////////////// step 2
 
 Product.leftObject = null;
-Product.middObject= null;
+Product.middObject = null;
 Product.rightObject = null;
 
 ///////////////////// step 3
@@ -57,7 +57,7 @@ function renderNewProduct() {
 
   var forbidden = [Product.leftObject, Product.middObject, Product.rightObject];
 
-///////////////////// step 5
+  ///////////////////// step 5
 
   do {
     Product.leftObject = getRandomProduct();
@@ -73,19 +73,19 @@ function renderNewProduct() {
     Product.rightObject = getRandomProduct();
   } while (forbidden.includes(Product.rightObject));
 
-///////////////////// step 6
+  ///////////////////// step 6
 
   Product.leftObject.shownCtr++;
   Product.middObject.shownCtr++;
   Product.rightObject.shownCtr++;
 
-///////////////////// step 7
+  ///////////////////// step 7
 
   var leftProductImageElement = Product.leftImage;
   var middProductImageElement = Product.middImage;
   var rightProductImageElement = Product.rightImage;
 
-///////////////////// step 8
+  ///////////////////// step 8
 
   leftProductImageElement.setAttribute('src', Product.leftObject.src);
   leftProductImageElement.setAttribute('alt', Product.leftObject.title);
@@ -96,13 +96,13 @@ function renderNewProduct() {
   rightProductImageElement.setAttribute('src', Product.rightObject.src);
   rightProductImageElement.setAttribute('alt', Product.rightObject.title);
 
-///////////////////// step 9
+  ///////////////////// step 9
 
   Product.leftTitle.textContent = Product.leftObject.title;
   Product.middTitle.textContent = Product.middObject.title;
   Product.rightTitle.textContent = Product.rightObject.title;
 
-///////////////////// step 10
+  ///////////////////// step 10
 }
 function getRandomProduct() {
   var index = Math.floor(Math.random() * Product.all.length);
@@ -113,26 +113,22 @@ function randomInRange(min, max) {
   var rand = Math.floor(Math.random() * range) + min
   return rand;
 }
-function updateTotals() {
-  var tableBody = document.getElementById('newpro');
+  ///////////////////// step 11
+  function finalList() {
+  var list = document.getElementById("list");
 
-  tableBody.innerHTML = '';
+  var li = document.createElement('li')
+  list.appendChild(li)
+
   for (var i = 0; i < Product.all.length; i++) {
-    var produc = Product.all[i];
-    var row = addElement('tr', tableBody);
-    addElement('td', row, produc.title);
-    addElement('td', row, '' + produc.clickCtr);
-    addElement('td', row, '' + produc.shownCtr);
+    var roduct = Product.all[i]
+    li = document.createElement('li');
+    list.appendChild(li);
+    li.textContent = roduct.title + " had " + roduct.clickCtr + " votes and was shown " + roduct.shownCtr + " times.";
   }
 }
-function addElement(tag, container, text) {
-  var element = document.createElement(tag);
-  container.appendChild(element);
-  if (text) {
-    element.textContent = text;
-  }
-  return element;
-}
+  ///////////////////// step 12
+
 function clickHandler(event) {
   var clickedId = event.target.id;
   var ProductClicked;
@@ -143,23 +139,22 @@ function clickHandler(event) {
   } else if (clickedId === 'right-image') {
     ProductClicked = Product.rightObject;
   } else {
-    alert('Please just click on one of the pictures products listed on the screen, not outside the picture frame ^_^')
+    alert('Please just click on one of the pictures Product listed on the screen, not outside the picture frame ^_^')
   }
   if (ProductClicked) {
     ProductClicked.clickCtr++;
     Product.roundCtr++;
-    updateTotals();
     if (Product.roundCtr === Product.roundLimit) {
       alert('No more clicking');
       Product.container.removeEventListener('click', clickHandler);
+      finalList();
+
     } else {
       renderNewProduct();
     }
   }
 }
 
-///////////////////// step 11
-
+///////////////////// step 14
 Product.container.addEventListener('click', clickHandler);
-updateTotals();
 renderNewProduct();
