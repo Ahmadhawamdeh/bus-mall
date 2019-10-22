@@ -113,6 +113,7 @@ function randomInRange(min, max) {
   var rand = Math.floor(Math.random() * range) + min
   return rand;
 }
+  ///////////////////// step 11
 
 function getProduct() {
   var data = localStorage.getItem('product');
@@ -125,7 +126,7 @@ function setProduct() {
   var ProductString = JSON.stringify(Product.all)
   localStorage.setItem('product', ProductString)
 }
-///////////////////// step 11
+///////////////////// step 12
 function finalList() {
   var list = document.getElementById("list");
 
@@ -140,7 +141,7 @@ function finalList() {
   }
 }
 
-///////////////////// step 12
+///////////////////// step 13
 
 function clickHandler(event) {
   var clickedId = event.target.id;
@@ -169,7 +170,7 @@ function clickHandler(event) {
   }
 }
 
-///////////////////// step 13
+///////////////////// step 14
 Product.container.addEventListener('click', clickHandler);
 getProduct();
 renderNewProduct();
