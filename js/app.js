@@ -127,6 +127,7 @@ function setProduct() {
   localStorage.setItem('product', ProductString)
 }
 ///////////////////// step 12
+
 function finalList() {
   var list = document.getElementById("list");
 
@@ -169,6 +170,9 @@ function clickHandler(event) {
     }
   }
 }
+// function setProduct(){
+//   var ProductString = localStorage.getItem
+// }
 
 ///////////////////// step 14
 Product.container.addEventListener('click', clickHandler);
