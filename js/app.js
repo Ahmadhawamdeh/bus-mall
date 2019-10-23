@@ -115,17 +115,21 @@ function randomInRange(min, max) {
 }
   ///////////////////// step 11
 
-function getProduct() {
-  var data = localStorage.getItem('product');
-  var ProductData = JSON.parse(data)
-  Product.all = ProductData;
-  renderNewProduct();
-}
+  function getProducts() {
+    var data = localStorage.getItem('product');
+    var ProductData = JSON.parse(data)
+    if (ProductData){
+      Product.all = ProductData;
+    }
+  }
+  
+  function setProduct() {
+    var ProductString = JSON.stringify(Product.all)
+    localStorage.setItem('product', ProductString)
+  }
 
-function setProduct() {
-  var ProductString = JSON.stringify(Product.all)
-  localStorage.setItem('product', ProductString)
-}
+  
+
 ///////////////////// step 12
 
 function finalList() {
@@ -147,6 +151,7 @@ function finalList() {
 function clickHandler(event) {
   var clickedId = event.target.id;
   var ProductClicked;
+  setProduct();
   if (clickedId === 'left-img') {
     ProductClicked = Product.leftObject;
   } else if (clickedId === 'midd-img') {
@@ -163,18 +168,58 @@ function clickHandler(event) {
       alert('No more clicking');
       Product.container.removeEventListener('click', clickHandler);
       finalList();
+      rendermallitems();
 
+      
+
+      
     } else {
       renderNewProduct();
-      setProduct();
+
     }
   }
 }
-// function setProduct(){
-//   var ProductString = localStorage.getItem
-// }
+function rendermallitems() {
+  var MallArray = [];
+  var ClickedArray = [];
+  var shownArray = [];
+  for (let i = 0; i < Product.all.length; i++) {
+      var MallInstenc = Product.all[i];
+      MallArray.push(MallInstenc.title + ' click');
+      MallArray.push(MallInstenc.title + ' Shown');
+      ClickedArray.push(MallInstenc.clickCtr);
+      shownArray.push(MallInstenc.shownCtr);
+  }
+  /////////////// step 13
+
+  var ctx = document.getElementById('Chart').getContext('2d');
+  var chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck ',
+              'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'
+          ],
+          datasets: [{
+              label: 'Item click',
+              backgroundColor: 'white',
+              borderColor: 'black',
+              data: ClickedArray,
+
+          },
+          {
+              label: 'Item Shown',
+              backgroundColor: 'red',
+              borderColor: 'black',
+              data: shownArray,
+          }
+          ],
+          options: {}
+      }
+  });
+}
+
 
 ///////////////////// step 14
 Product.container.addEventListener('click', clickHandler);
-getProduct();
+getProducts();
 renderNewProduct();
