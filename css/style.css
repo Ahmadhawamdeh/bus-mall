@@ -1,9 +1,10 @@
 header{
     color: brown;
     font-size: x-large;
+    font-family: fantasy;
   }
   body{
-    background-image: url('https://cdn3.vectorstock.com/i/1000x1000/30/12/abstract-geometric-background-black-and-white-vector-10383012.jpg');
+    background-image: url('https://www.quantumblack.com/static/hero-home-66ad0082c5fa59b705aec799685a5a5e-6ded7.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -30,6 +31,6 @@ header{
     margin-top: 187px;
   }
   ul{
-    color: red;
+    color: coral;
     font-size: large;
   }

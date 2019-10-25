@@ -1,18 +1,20 @@
 'use strict';
 function Product(title, src) {
+   //// step 1 :- Defin object
   this.title = title;
   this.src = src;
   this.clickCtr = 0;
   this.shownCtr = 0;
   Product.all.push(this);
 }
+
 Product.roundCtr = 0;
 Product.roundLimit = 25;
 Product.all = [];
 
 Product.container = document.getElementById('productcont');
 
-///////////////////// step 1
+//// step 2 :- img and title statment
 
 Product.leftImage = document.getElementById('left-img');
 Product.middImage = document.getElementById('midd-img');
@@ -22,13 +24,12 @@ Product.leftTitle = document.getElementById('left-title');
 Product.middTitle = document.getElementById('midd-title');
 Product.rightTitle = document.getElementById('right-title');
 
-///////////////////// step 2
 
 Product.leftObject = null;
 Product.middObject = null;
 Product.rightObject = null;
 
-///////////////////// step 3
+//// step 3 :- call or pull a images
 
 new Product('Bag', 'images/bag.jpg');
 new Product('Banana', 'images/banana.jpg');
@@ -51,13 +52,12 @@ new Product('usb', 'images/usb.gif');
 new Product('water-can', 'images/water-can.jpg');
 new Product('wine-glass', 'images/wine-glass.jpg');
 
-///////////////////// step 4
+//// step 4 :- loop statment
 
 function renderNewProduct() {
 
   var forbidden = [Product.leftObject, Product.middObject, Product.rightObject];
 
-  ///////////////////// step 5
 
   do {
     Product.leftObject = getRandomProduct();
@@ -73,19 +73,19 @@ function renderNewProduct() {
     Product.rightObject = getRandomProduct();
   } while (forbidden.includes(Product.rightObject));
 
-  ///////////////////// step 6
+  //// step 5 :- caonter 
 
   Product.leftObject.shownCtr++;
   Product.middObject.shownCtr++;
   Product.rightObject.shownCtr++;
 
-  ///////////////////// step 7
+  //// step 6 :- Arrange images with places to display
 
   var leftProductImageElement = Product.leftImage;
   var middProductImageElement = Product.middImage;
   var rightProductImageElement = Product.rightImage;
 
-  ///////////////////// step 8
+  //// step 7 :- images (src and title)
 
   leftProductImageElement.setAttribute('src', Product.leftObject.src);
   leftProductImageElement.setAttribute('alt', Product.leftObject.title);
@@ -96,13 +96,13 @@ function renderNewProduct() {
   rightProductImageElement.setAttribute('src', Product.rightObject.src);
   rightProductImageElement.setAttribute('alt', Product.rightObject.title);
 
-  ///////////////////// step 9
+  //// step 8 :- defin title images
 
   Product.leftTitle.textContent = Product.leftObject.title;
   Product.middTitle.textContent = Product.middObject.title;
   Product.rightTitle.textContent = Product.rightObject.title;
 
-  ///////////////////// step 10
+  //// step 9 :- math statment
 }
 function getRandomProduct() {
   var index = Math.floor(Math.random() * Product.all.length);
@@ -113,24 +113,24 @@ function randomInRange(min, max) {
   var rand = Math.floor(Math.random() * range) + min
   return rand;
 }
-  ///////////////////// step 11
+//// step 10 :- local storage statment
 
-  function getProducts() {
-    var data = localStorage.getItem('product');
-    var ProductData = JSON.parse(data)
-    if (ProductData){
-      Product.all = ProductData;
-    }
+function getProducts() {
+  var data = localStorage.getItem('product');
+  var ProductData = JSON.parse(data)
+  if (ProductData) {
+    Product.all = ProductData;
   }
-  
-  function setProduct() {
-    var ProductString = JSON.stringify(Product.all)
-    localStorage.setItem('product', ProductString)
-  }
+}
 
-  
+function setProduct() {
+  var ProductString = JSON.stringify(Product.all)
+  localStorage.setItem('product', ProductString)
+}
 
-///////////////////// step 12
+
+
+//// step 11 :- list of product statment
 
 function finalList() {
   var list = document.getElementById("list");
@@ -146,7 +146,7 @@ function finalList() {
   }
 }
 
-///////////////////// step 13
+//// step 12 :- click function statment
 
 function clickHandler(event) {
   var clickedId = event.target.id;
@@ -170,9 +170,9 @@ function clickHandler(event) {
       finalList();
       rendermallitems();
 
-      
 
-      
+
+
     } else {
       renderNewProduct();
 
@@ -184,42 +184,41 @@ function rendermallitems() {
   var ClickedArray = [];
   var shownArray = [];
   for (let i = 0; i < Product.all.length; i++) {
-      var MallInstenc = Product.all[i];
-      MallArray.push(MallInstenc.title + ' click');
-      MallArray.push(MallInstenc.title + ' Shown');
-      ClickedArray.push(MallInstenc.clickCtr);
-      shownArray.push(MallInstenc.shownCtr);
+    var MallInstenc = Product.all[i];
+    MallArray.push(MallInstenc.title + ' click');
+    MallArray.push(MallInstenc.title + ' Shown');
+    ClickedArray.push(MallInstenc.clickCtr);
+    shownArray.push(MallInstenc.shownCtr);
   }
-  /////////////// step 13
+//// step 13 :- chart statment
 
   var ctx = document.getElementById('Chart').getContext('2d');
   var chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck ',
-              'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'
-          ],
-          datasets: [{
-              label: 'Item click',
-              backgroundColor: 'white',
-              borderColor: 'black',
-              data: ClickedArray,
+    type: 'bar',
+    data: {
+      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck ',
+        'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'
+      ],
+      datasets: [{
+        label: 'Item click',
+        backgroundColor: 'white',
+        borderColor: 'black',
+        data: ClickedArray,
 
-          },
-          {
-              label: 'Item Shown',
-              backgroundColor: 'red',
-              borderColor: 'black',
-              data: shownArray,
-          }
-          ],
-          options: {}
+      },
+      {
+        label: 'Item Shown',
+        backgroundColor: 'red',
+        borderColor: 'black',
+        data: shownArray,
       }
+      ],
+      options: {}
+    }
   });
 }
+//// step 14 :- call function
 
-
-///////////////////// step 14
 Product.container.addEventListener('click', clickHandler);
 getProducts();
 renderNewProduct();
